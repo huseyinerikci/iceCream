@@ -1,4 +1,3 @@
-import React from "react";
 import AmountPicker from "./AmountPicker";
 
 const CartItem = ({ item }) => {
@@ -13,7 +12,9 @@ const CartItem = ({ item }) => {
 
         <div>
           <h1 className="font-semibold text-lg md:text-xl">{item.name}</h1>
-          <p className="text-gray-500 md:text-lg">{item.type}</p>
+          <p className="text-gray-500 md:text-lg">
+            {item.type === "cup" ? "Bardakta" : "Külahta"}
+          </p>
         </div>
       </div>
 

@@ -30,7 +30,7 @@ const Modal = ({ isOpen, close }) => {
               cart.map((item) => <CartItem key={item.id} item={item} />)
             )}
           </div>
-          <CartInfo />
+          <CartInfo cart={cart} />
         </div>
       </div>
     )

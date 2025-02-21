@@ -23,7 +23,18 @@ const cartSlice = createSlice({
         });
       }
     },
-    deleteFromCart: (state, { payload }) => {},
+    deleteFromCart: (state, { payload }) => {
+      const index = state.cart.findIndex(
+        (item) => item.id === payload.id && item.type === payload.type
+      );
+      if (state.cart[index].amount > 1) {
+        //miktar 1 den fazla ise miktar azalt
+        state.cart[index].amount--;
+      } else {
+        //miktar 1 ise ürünü sil
+        state.cart.splice(index, 1);
+      }
+    },
     createOrder: (state, { payload }) => {},
   },
 });
