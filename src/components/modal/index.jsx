@@ -8,9 +8,9 @@ const Modal = ({ isOpen, close }) => {
     isOpen && (
       <div
         data-testid="modal"
-        className="fixed inset-0 bg-black/30 backdrop-blur-sm grid place-items-center z-[999]"
+        className="fixed inset-0 bg-black/30 backdrop-blur-sm grid place-items-center z-[999]  "
       >
-        <div className="bg-white p-5 rounded-lg w-[90%] md:w-[600px] text-black">
+        <div className="bg-white p-5 rounded-lg w-[90%] md:w-[600px] text-black max-h-screen overflow-auto">
           <div className="border-b pb-3 flex justify-between max-md:text-lg fs-5">
             <h1 className="font-semibold">Sipariş</h1>
             <button
@@ -27,10 +27,12 @@ const Modal = ({ isOpen, close }) => {
                 Henüz sepete ürün eklenmedi
               </p>
             ) : (
-              cart.map((item) => <CartItem key={item.id} item={item} />)
+              cart.map((item) => (
+                <CartItem key={`${item.id}-${item.type}`} item={item} />
+              ))
             )}
           </div>
-          <CartInfo cart={cart} />
+          <CartInfo cart={cart} close={close} />
         </div>
       </div>
     )

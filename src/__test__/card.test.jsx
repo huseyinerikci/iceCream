@@ -19,7 +19,7 @@ describe("card componenti", () => {
   });
 
   //her test sonrası mockları temizle
-  beforeAll(() => {
+  afterEach(() => {
     jest.clearAllMocks();
   });
 
@@ -29,7 +29,7 @@ describe("card componenti", () => {
 
     screen.getByRole("heading", { name: "Bal Badem" });
 
-    screen.getByText("25₺/top");
+    screen.getByText("25₺ / top");
 
     const img = screen.getByRole("img");
     expect(img).toHaveAttribute("src", "/ice-1.png");
@@ -38,8 +38,10 @@ describe("card componenti", () => {
   //! Test 2
   it("tipin seçili olma durumuna göre buton görünürlüğü", async () => {
     const user = userEvent.setup();
+
+    render(<Card item={mockData[0]} />);
     //sepet ekle buton al
-    const basketBtn = screen.getByRole("button", { name: /sepete/i });
+    const basketBtn = screen.getByRole("button", { name: /sepet/i });
 
     //sepet ekle buton görünmez mi?
     expect(basketBtn).toHaveClass("invisible");
@@ -73,12 +75,14 @@ describe("card componenti", () => {
     await user.click(cornetBtn);
 
     //sepet ekle buton al
-    const basketBtn = screen.getByRole("button", { name: /sepete/i });
+    const basketBtn = screen.getByRole("button", { name: /sepet/i });
 
     //sepete ekle buton tıkla
     await user.click(basketBtn);
 
     //dispatch çalıştımı
-    expect(dispatchMock).toHaveBeenCalledWith(addToCart({ item: mockData[0] }));
+    expect(dispatchMock).toHaveBeenCalledWith(
+      addToCart({ item: mockData[0], selectedType: "cornet" })
+    );
   });
 });

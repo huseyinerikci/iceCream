@@ -56,7 +56,7 @@ describe("modal componenti", () => {
     //useselector çağrılması boş return
     useSelector.mockReturnValue({ cart: [] });
 
-    //render isopen:false
+    //render isopen:true
     const { rerender } = render(<Modal isOpen={true} close={closeMock} />);
 
     //uyarı mesajı ekranda var
@@ -65,17 +65,17 @@ describe("modal componenti", () => {
     //useselector çağrılması dolu return
     useSelector.mockReturnValue({ cart: [12, 12, 12] });
 
-    //render isopen:false
+    //render isopen:true
     rerender(<Modal isOpen={true} close={closeMock} />);
 
-    //uyarı mesajı ekranda var
+    //uyarı mesajı ekranda yok
     expect(screen.queryByText(/henüz/i)).toBeNull();
   });
   it("sepet dolu ise kart basılır", () => {
     //useselector çağrılması dolu return
     useSelector.mockReturnValue({ cart: [12, 12, 12] });
 
-    //render isopen:false
+    //render isopen:true
     render(<Modal isOpen={true} close={closeMock} />);
 
     //ekrandaki cartitemleri al
